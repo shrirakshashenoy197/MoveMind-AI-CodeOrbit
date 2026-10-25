@@ -1,0 +1,980 @@
+{
+  "hazards": [
+    {
+      "id": "QSaxr7JksL",
+      "category": "Pothole",
+      "severity": "high",
+      "description": "Pothole near the   main road",
+      "lat": 12.923675,
+      "lng": 74.858884,
+      "status": "unverified",
+      "source": "Community submission",
+      "createdAt": "2026-10-25T01:34:40.750Z",
+      "updatedAt": "2026-10-25T01:34:40.750Z",
+      "demo": false
+    },
+    {
+      "id": "demo-pothole-1",
+      "category": "Pothole",
+      "severity": "high",
+      "description": "Large pothole reported near a busy junction. Demo record for route-risk walkthrough.",
+      "lat": 12.916,
+      "lng": 74.852,
+      "status": "unverified",
+      "source": "Demonstration data",
+      "createdAt": "2026-10-24T15:47:04.390Z",
+      "updatedAt": "2026-10-24T15:47:04.390Z",
+      "demo": true
+    },
+    {
+      "id": "demo-water-1",
+      "category": "Waterlogging",
+      "severity": "high",
+      "description": "Waterlogging reported after rainfall. Conditions may have changed since this report.",
+      "lat": 12.922,
+      "lng": 74.842,
+      "status": "under_review",
+      "source": "Demonstration data",
+      "createdAt": "2026-10-23T20:35:04.390Z",
+      "updatedAt": "2026-10-23T20:35:04.390Z",
+      "demo": true
+    },
+    {
+      "id": "demo-damage-1",
+      "category": "Damaged road",
+      "severity": "medium",
+      "description": "Uneven road surface reported along this corridor.",
+      "lat": 12.911,
+      "lng": 74.858,
+      "status": "unverified",
+      "source": "Demonstration data",
+      "createdAt": "2026-10-22T01:23:04.390Z",
+      "updatedAt": "2026-10-22T01:23:04.390Z",
+      "demo": true
+    },
+    {
+      "id": "demo-obstruction-1",
+      "category": "Obstruction",
+      "severity": "high",
+      "description": "Temporary obstruction reported; current status is not independently confirmed.",
+      "lat": 12.917,
+      "lng": 74.85,
+      "status": "verified",
+      "source": "Demonstration data — illustrative verification state",
+      "createdAt": "2026-10-24T20:35:04.390Z",
+      "updatedAt": "2026-10-24T22:59:04.390Z",
+      "demo": true
+    },
+    {
+      "id": "demo-pothole-2",
+      "category": "Pothole",
+      "severity": "low",
+      "description": "Small pothole report for demonstration of severity differences.",
+      "lat": 12.919,
+      "lng": 74.847,
+      "status": "unverified",
+      "source": "Demonstration data",
+      "createdAt": "2026-10-17T01:23:04.390Z",
+      "updatedAt": "2026-10-17T01:23:04.390Z",
+      "demo": true
+    },
+    {
+      "id": "demo-water-2",
+      "category": "Waterlogging",
+      "severity": "medium",
+      "description": "A second waterlogging report in the sample corridor.",
+      "lat": 12.912,
+      "lng": 74.85,
+      "status": "under_review",
+      "source": "Demonstration data",
+      "createdAt": "2026-10-23T01:23:04.390Z",
+      "updatedAt": "2026-10-23T01:23:04.390Z",
+      "demo": true
+    }
+  ],
+  "routeHistory": [
+    {
+      "id": "ipLSlm_A",
+      "createdAt": "2026-10-25T01:57:56.443Z",
+      "routes": [
+        {
+          "id": "route-a",
+          "name": "Coastal Connector",
+          "distanceKm": 2.34,
+          "durationMin": 7,
+          "source": "Illustrative demo geometry; distance calculated from geometry; duration assumes 20 km/h average speed",
+          "geometry": [
+            {
+              "lat": 12.9141,
+              "lng": 74.856
+            },
+            {
+              "lat": 12.916,
+              "lng": 74.852
+            },
+            {
+              "lat": 12.919,
+              "lng": 74.847
+            },
+            {
+              "lat": 12.922,
+              "lng": 74.842
+            },
+            {
+              "lat": 12.924,
+              "lng": 74.837
+            }
+          ],
+          "risk": {
+            "score": 82.3,
+            "category": "High",
+            "hazardCount": 4,
+            "repeatedReportCount": 0,
+            "hazards": [
+              {
+                "id": "demo-obstruction-1",
+                "category": "Obstruction",
+                "severity": "high",
+                "description": "Temporary obstruction reported; current status is not independently confirmed.",
+                "lat": 12.917,
+                "lng": 74.85,
+                "status": "verified",
+                "source": "Demonstration data — illustrative verification state",
+                "createdAt": "2026-10-24T20:35:04.390Z",
+                "updatedAt": "2026-10-24T22:59:04.390Z",
+                "demo": true,
+                "repeatedReportCount": 1,
+                "reportIds": [
+                  "demo-obstruction-1"
+                ],
+                "risk": {
+                  "score": 77.1,
+                  "category": "Elevated",
+                  "factors": {
+                    "severity": {
+                      "normalized": 100,
+                      "weight": 0.5,
+                      "contribution": 50,
+                      "label": "high"
+                    },
+                    "frequency": {
+                      "normalized": 25,
+                      "weight": 0.3,
+                      "contribution": 7.5,
+                      "nearbyIndependentReports": 1
+                    },
+                    "recency": {
+                      "normalized": 97.8,
+                      "weight": 0.2,
+                      "contribution": 19.6,
+                      "ageDays": 0.2242135648148148
+                    }
+                  },
+                  "confidence": "Moderate",
+                  "explanation": "high severity contributes 50/50 weighted points; 1 independent nearby report contribute 7.5/30 points; recency contributes 19.6/20 points. This is a provisional estimate, not an official safety rating."
+                }
+              },
+              {
+                "id": "demo-pothole-1",
+                "category": "Pothole",
+                "severity": "high",
+                "description": "Large pothole reported near a busy junction. Demo record for route-risk walkthrough.",
+                "lat": 12.916,
+                "lng": 74.852,
+                "status": "unverified",
+                "source": "Demonstration data",
+                "createdAt": "2026-10-24T15:47:04.390Z",
+                "updatedAt": "2026-10-24T15:47:04.390Z",
+                "demo": true,
+                "repeatedReportCount": 1,
+                "reportIds": [
+                  "demo-pothole-1"
+                ],
+                "risk": {
+                  "score": 76.7,
+                  "category": "Elevated",
+                  "factors": {
+                    "severity": {
+                      "normalized": 100,
+                      "weight": 0.5,
+                      "contribution": 50,
+                      "label": "high"
+                    },
+                    "frequency": {
+                      "normalized": 25,
+                      "weight": 0.3,
+                      "contribution": 7.5,
+                      "nearbyIndependentReports": 1
+                    },
+                    "recency": {
+                      "normalized": 95.9,
+                      "weight": 0.2,
+                      "contribution": 19.2,
+                      "ageDays": 0.4242135648148148
+                    }
+                  },
+                  "confidence": "Moderate",
+                  "explanation": "high severity contributes 50/50 weighted points; 1 independent nearby report contribute 7.5/30 points; recency contributes 19.2/20 points. This is a provisional estimate, not an official safety rating."
+                }
+              },
+              {
+                "id": "demo-water-1",
+                "category": "Waterlogging",
+                "severity": "high",
+                "description": "Waterlogging reported after rainfall. Conditions may have changed since this report.",
+                "lat": 12.922,
+                "lng": 74.842,
+                "status": "under_review",
+                "source": "Demonstration data",
+                "createdAt": "2026-10-23T20:35:04.390Z",
+                "updatedAt": "2026-10-23T20:35:04.390Z",
+                "demo": true,
+                "repeatedReportCount": 1,
+                "reportIds": [
+                  "demo-water-1"
+                ],
+                "risk": {
+                  "score": 75.2,
+                  "category": "Elevated",
+                  "factors": {
+                    "severity": {
+                      "normalized": 100,
+                      "weight": 0.5,
+                      "contribution": 50,
+                      "label": "high"
+                    },
+                    "frequency": {
+                      "normalized": 25,
+                      "weight": 0.3,
+                      "contribution": 7.5,
+                      "nearbyIndependentReports": 1
+                    },
+                    "recency": {
+                      "normalized": 88.6,
+                      "weight": 0.2,
+                      "contribution": 17.7,
+                      "ageDays": 1.224213564814815
+                    }
+                  },
+                  "confidence": "Moderate",
+                  "explanation": "high severity contributes 50/50 weighted points; 1 independent nearby report contribute 7.5/30 points; recency contributes 17.7/20 points. This is a provisional estimate, not an official safety rating."
+                }
+              },
+              {
+                "id": "demo-pothole-2",
+                "category": "Pothole",
+                "severity": "low",
+                "description": "Small pothole report for demonstration of severity differences.",
+                "lat": 12.919,
+                "lng": 74.847,
+                "status": "unverified",
+                "source": "Demonstration data",
+                "createdAt": "2026-10-17T01:23:04.390Z",
+                "updatedAt": "2026-10-17T01:23:04.390Z",
+                "demo": true,
+                "repeatedReportCount": 1,
+                "reportIds": [
+                  "demo-pothole-2"
+                ],
+                "risk": {
+                  "score": 29,
+                  "category": "Low",
+                  "factors": {
+                    "severity": {
+                      "normalized": 25,
+                      "weight": 0.5,
+                      "contribution": 12.5,
+                      "label": "low"
+                    },
+                    "frequency": {
+                      "normalized": 25,
+                      "weight": 0.3,
+                      "contribution": 7.5,
+                      "nearbyIndependentReports": 1
+                    },
+                    "recency": {
+                      "normalized": 45.2,
+                      "weight": 0.2,
+                      "contribution": 9,
+                      "ageDays": 8.024213564814815
+                    }
+                  },
+                  "confidence": "Moderate",
+                  "explanation": "low severity contributes 12.5/50 weighted points; 1 independent nearby report contribute 7.5/30 points; recency contributes 9/20 points. This is a provisional estimate, not an official safety rating."
+                }
+              }
+            ],
+            "confidence": "Moderate",
+            "explanation": "Based on 4 distinct incident(s) and 4 report(s) within 350 m of the route line. 0 repeated report(s) are shown separately and do not inflate the incident score."
+          }
+        },
+        {
+          "id": "route-b",
+          "name": "City Centre Link",
+          "distanceKm": 3.24,
+          "durationMin": 10,
+          "source": "Illustrative demo geometry; distance calculated from geometry; duration assumes 20 km/h average speed",
+          "geometry": [
+            {
+              "lat": 12.9141,
+              "lng": 74.856
+            },
+            {
+              "lat": 12.911,
+              "lng": 74.858
+            },
+            {
+              "lat": 12.912,
+              "lng": 74.85
+            },
+            {
+              "lat": 12.917,
+              "lng": 74.844
+            },
+            {
+              "lat": 12.921,
+              "lng": 74.839
+            },
+            {
+              "lat": 12.924,
+              "lng": 74.837
+            }
+          ],
+          "risk": {
+            "score": 76.8,
+            "category": "Elevated",
+            "hazardCount": 3,
+            "repeatedReportCount": 0,
+            "hazards": [
+              {
+                "id": "demo-water-1",
+                "category": "Waterlogging",
+                "severity": "high",
+                "description": "Waterlogging reported after rainfall. Conditions may have changed since this report.",
+                "lat": 12.922,
+                "lng": 74.842,
+                "status": "under_review",
+                "source": "Demonstration data",
+                "createdAt": "2026-10-23T20:35:04.390Z",
+                "updatedAt": "2026-10-23T20:35:04.390Z",
+                "demo": true,
+                "repeatedReportCount": 1,
+                "reportIds": [
+                  "demo-water-1"
+                ],
+                "risk": {
+                  "score": 75.2,
+                  "category": "Elevated",
+                  "factors": {
+                    "severity": {
+                      "normalized": 100,
+                      "weight": 0.5,
+                      "contribution": 50,
+                      "label": "high"
+                    },
+                    "frequency": {
+                      "normalized": 25,
+                      "weight": 0.3,
+                      "contribution": 7.5,
+                      "nearbyIndependentReports": 1
+                    },
+                    "recency": {
+                      "normalized": 88.6,
+                      "weight": 0.2,
+                      "contribution": 17.7,
+                      "ageDays": 1.224213564814815
+                    }
+                  },
+                  "confidence": "Moderate",
+                  "explanation": "high severity contributes 50/50 weighted points; 1 independent nearby report contribute 7.5/30 points; recency contributes 17.7/20 points. This is a provisional estimate, not an official safety rating."
+                }
+              },
+              {
+                "id": "demo-water-2",
+                "category": "Waterlogging",
+                "severity": "medium",
+                "description": "A second waterlogging report in the sample corridor.",
+                "lat": 12.912,
+                "lng": 74.85,
+                "status": "under_review",
+                "source": "Demonstration data",
+                "createdAt": "2026-10-23T01:23:04.390Z",
+                "updatedAt": "2026-10-23T01:23:04.390Z",
+                "demo": true,
+                "repeatedReportCount": 1,
+                "reportIds": [
+                  "demo-water-2"
+                ],
+                "risk": {
+                  "score": 53.9,
+                  "category": "Moderate",
+                  "factors": {
+                    "severity": {
+                      "normalized": 60,
+                      "weight": 0.5,
+                      "contribution": 30,
+                      "label": "medium"
+                    },
+                    "frequency": {
+                      "normalized": 25,
+                      "weight": 0.3,
+                      "contribution": 7.5,
+                      "nearbyIndependentReports": 1
+                    },
+                    "recency": {
+                      "normalized": 81.8,
+                      "weight": 0.2,
+                      "contribution": 16.4,
+                      "ageDays": 2.024213564814815
+                    }
+                  },
+                  "confidence": "Moderate",
+                  "explanation": "medium severity contributes 30/50 weighted points; 1 independent nearby report contribute 7.5/30 points; recency contributes 16.4/20 points. This is a provisional estimate, not an official safety rating."
+                }
+              },
+              {
+                "id": "demo-damage-1",
+                "category": "Damaged road",
+                "severity": "medium",
+                "description": "Uneven road surface reported along this corridor.",
+                "lat": 12.911,
+                "lng": 74.858,
+                "status": "unverified",
+                "source": "Demonstration data",
+                "createdAt": "2026-10-22T01:23:04.390Z",
+                "updatedAt": "2026-10-22T01:23:04.390Z",
+                "demo": true,
+                "repeatedReportCount": 1,
+                "reportIds": [
+                  "demo-damage-1"
+                ],
+                "risk": {
+                  "score": 52.3,
+                  "category": "Moderate",
+                  "factors": {
+                    "severity": {
+                      "normalized": 60,
+                      "weight": 0.5,
+                      "contribution": 30,
+                      "label": "medium"
+                    },
+                    "frequency": {
+                      "normalized": 25,
+                      "weight": 0.3,
+                      "contribution": 7.5,
+                      "nearbyIndependentReports": 1
+                    },
+                    "recency": {
+                      "normalized": 74.1,
+                      "weight": 0.2,
+                      "contribution": 14.8,
+                      "ageDays": 3.024213564814815
+                    }
+                  },
+                  "confidence": "Moderate",
+                  "explanation": "medium severity contributes 30/50 weighted points; 1 independent nearby report contribute 7.5/30 points; recency contributes 14.8/20 points. This is a provisional estimate, not an official safety rating."
+                }
+              }
+            ],
+            "confidence": "Moderate",
+            "explanation": "Based on 3 distinct incident(s) and 3 report(s) within 350 m of the route line. 0 repeated report(s) are shown separately and do not inflate the incident score."
+          }
+        },
+        {
+          "id": "route-c",
+          "name": "Greenway Alternative",
+          "distanceKm": 9.33,
+          "durationMin": 28,
+          "source": "Illustrative demo geometry; distance calculated from geometry; duration assumes 20 km/h average speed",
+          "geometry": [
+            {
+              "lat": 12.9141,
+              "lng": 74.856
+            },
+            {
+              "lat": 12.918,
+              "lng": 74.866
+            },
+            {
+              "lat": 12.902,
+              "lng": 74.864
+            },
+            {
+              "lat": 12.902,
+              "lng": 74.831
+            },
+            {
+              "lat": 12.918,
+              "lng": 74.83
+            },
+            {
+              "lat": 12.924,
+              "lng": 74.837
+            }
+          ],
+          "risk": {
+            "score": null,
+            "category": "Insufficient data",
+            "hazardCount": 0,
+            "repeatedReportCount": 0,
+            "hazards": [],
+            "confidence": "Limited",
+            "explanation": "No reports are associated with this route corridor. This means there is insufficient reported information, not that the route is safe."
+          }
+        }
+      ],
+      "comparison": {
+        "lowestRiskRouteId": "route-b",
+        "shortestRouteId": "route-a",
+        "fastestRouteId": "route-a",
+        "summary": "City Centre Link has the lowest estimated risk among routes with associated reports. Coastal Connector is shortest and Coastal Connector has the shortest estimated time. These are separate trade-offs."
+      },
+      "preference": "balanced",
+      "origin": "Mangalore demo origin",
+      "destination": "Mangalore demo destination",
+      "note": "Route geometry, distances and durations are illustrative demo data; travel time is not live traffic."
+    },
+    {
+      "id": "4Hy3qnjI",
+      "createdAt": "2026-10-25T01:35:35.761Z",
+      "routes": [
+        {
+          "id": "route-a",
+          "name": "Coastal Connector",
+          "distanceKm": 2.34,
+          "durationMin": 7,
+          "source": "Illustrative demo geometry; distance calculated from geometry; duration assumes 20 km/h average speed",
+          "geometry": [
+            {
+              "lat": 12.9141,
+              "lng": 74.856
+            },
+            {
+              "lat": 12.916,
+              "lng": 74.852
+            },
+            {
+              "lat": 12.919,
+              "lng": 74.847
+            },
+            {
+              "lat": 12.922,
+              "lng": 74.842
+            },
+            {
+              "lat": 12.924,
+              "lng": 74.837
+            }
+          ],
+          "risk": {
+            "score": 82.3,
+            "category": "High",
+            "hazardCount": 4,
+            "repeatedReportCount": 0,
+            "hazards": [
+              {
+                "id": "demo-obstruction-1",
+                "category": "Obstruction",
+                "severity": "high",
+                "description": "Temporary obstruction reported; current status is not independently confirmed.",
+                "lat": 12.917,
+                "lng": 74.85,
+                "status": "verified",
+                "source": "Demonstration data — illustrative verification state",
+                "createdAt": "2026-10-24T20:35:04.390Z",
+                "updatedAt": "2026-10-24T22:59:04.390Z",
+                "demo": true,
+                "repeatedReportCount": 1,
+                "reportIds": [
+                  "demo-obstruction-1"
+                ],
+                "risk": {
+                  "score": 77.1,
+                  "category": "Elevated",
+                  "factors": {
+                    "severity": {
+                      "normalized": 100,
+                      "weight": 0.5,
+                      "contribution": 50,
+                      "label": "high"
+                    },
+                    "frequency": {
+                      "normalized": 25,
+                      "weight": 0.3,
+                      "contribution": 7.5,
+                      "nearbyIndependentReports": 1
+                    },
+                    "recency": {
+                      "normalized": 98,
+                      "weight": 0.2,
+                      "contribution": 19.6,
+                      "ageDays": 0.2086963773148148
+                    }
+                  },
+                  "confidence": "Moderate",
+                  "explanation": "high severity contributes 50/50 weighted points; 1 independent nearby report contribute 7.5/30 points; recency contributes 19.6/20 points. This is a provisional estimate, not an official safety rating."
+                }
+              },
+              {
+                "id": "demo-pothole-1",
+                "category": "Pothole",
+                "severity": "high",
+                "description": "Large pothole reported near a busy junction. Demo record for route-risk walkthrough.",
+                "lat": 12.916,
+                "lng": 74.852,
+                "status": "unverified",
+                "source": "Demonstration data",
+                "createdAt": "2026-10-24T15:47:04.390Z",
+                "updatedAt": "2026-10-24T15:47:04.390Z",
+                "demo": true,
+                "repeatedReportCount": 1,
+                "reportIds": [
+                  "demo-pothole-1"
+                ],
+                "risk": {
+                  "score": 76.7,
+                  "category": "Elevated",
+                  "factors": {
+                    "severity": {
+                      "normalized": 100,
+                      "weight": 0.5,
+                      "contribution": 50,
+                      "label": "high"
+                    },
+                    "frequency": {
+                      "normalized": 25,
+                      "weight": 0.3,
+                      "contribution": 7.5,
+                      "nearbyIndependentReports": 1
+                    },
+                    "recency": {
+                      "normalized": 96,
+                      "weight": 0.2,
+                      "contribution": 19.2,
+                      "ageDays": 0.40869637731481484
+                    }
+                  },
+                  "confidence": "Moderate",
+                  "explanation": "high severity contributes 50/50 weighted points; 1 independent nearby report contribute 7.5/30 points; recency contributes 19.2/20 points. This is a provisional estimate, not an official safety rating."
+                }
+              },
+              {
+                "id": "demo-water-1",
+                "category": "Waterlogging",
+                "severity": "high",
+                "description": "Waterlogging reported after rainfall. Conditions may have changed since this report.",
+                "lat": 12.922,
+                "lng": 74.842,
+                "status": "under_review",
+                "source": "Demonstration data",
+                "createdAt": "2026-10-23T20:35:04.390Z",
+                "updatedAt": "2026-10-23T20:35:04.390Z",
+                "demo": true,
+                "repeatedReportCount": 1,
+                "reportIds": [
+                  "demo-water-1"
+                ],
+                "risk": {
+                  "score": 75.2,
+                  "category": "Elevated",
+                  "factors": {
+                    "severity": {
+                      "normalized": 100,
+                      "weight": 0.5,
+                      "contribution": 50,
+                      "label": "high"
+                    },
+                    "frequency": {
+                      "normalized": 25,
+                      "weight": 0.3,
+                      "contribution": 7.5,
+                      "nearbyIndependentReports": 1
+                    },
+                    "recency": {
+                      "normalized": 88.7,
+                      "weight": 0.2,
+                      "contribution": 17.7,
+                      "ageDays": 1.2086963773148147
+                    }
+                  },
+                  "confidence": "Moderate",
+                  "explanation": "high severity contributes 50/50 weighted points; 1 independent nearby report contribute 7.5/30 points; recency contributes 17.7/20 points. This is a provisional estimate, not an official safety rating."
+                }
+              },
+              {
+                "id": "demo-pothole-2",
+                "category": "Pothole",
+                "severity": "low",
+                "description": "Small pothole report for demonstration of severity differences.",
+                "lat": 12.919,
+                "lng": 74.847,
+                "status": "unverified",
+                "source": "Demonstration data",
+                "createdAt": "2026-10-17T01:23:04.390Z",
+                "updatedAt": "2026-10-17T01:23:04.390Z",
+                "demo": true,
+                "repeatedReportCount": 1,
+                "reportIds": [
+                  "demo-pothole-2"
+                ],
+                "risk": {
+                  "score": 29,
+                  "category": "Low",
+                  "factors": {
+                    "severity": {
+                      "normalized": 25,
+                      "weight": 0.5,
+                      "contribution": 12.5,
+                      "label": "low"
+                    },
+                    "frequency": {
+                      "normalized": 25,
+                      "weight": 0.3,
+                      "contribution": 7.5,
+                      "nearbyIndependentReports": 1
+                    },
+                    "recency": {
+                      "normalized": 45.2,
+                      "weight": 0.2,
+                      "contribution": 9,
+                      "ageDays": 8.008696377314815
+                    }
+                  },
+                  "confidence": "Moderate",
+                  "explanation": "low severity contributes 12.5/50 weighted points; 1 independent nearby report contribute 7.5/30 points; recency contributes 9/20 points. This is a provisional estimate, not an official safety rating."
+                }
+              }
+            ],
+            "confidence": "Moderate",
+            "explanation": "Based on 4 distinct incident(s) and 4 report(s) within 350 m of the route line. 0 repeated report(s) are shown separately and do not inflate the incident score."
+          }
+        },
+        {
+          "id": "route-b",
+          "name": "City Centre Link",
+          "distanceKm": 3.24,
+          "durationMin": 10,
+          "source": "Illustrative demo geometry; distance calculated from geometry; duration assumes 20 km/h average speed",
+          "geometry": [
+            {
+              "lat": 12.9141,
+              "lng": 74.856
+            },
+            {
+              "lat": 12.911,
+              "lng": 74.858
+            },
+            {
+              "lat": 12.912,
+              "lng": 74.85
+            },
+            {
+              "lat": 12.917,
+              "lng": 74.844
+            },
+            {
+              "lat": 12.921,
+              "lng": 74.839
+            },
+            {
+              "lat": 12.924,
+              "lng": 74.837
+            }
+          ],
+          "risk": {
+            "score": 76.8,
+            "category": "Elevated",
+            "hazardCount": 3,
+            "repeatedReportCount": 0,
+            "hazards": [
+              {
+                "id": "demo-water-1",
+                "category": "Waterlogging",
+                "severity": "high",
+                "description": "Waterlogging reported after rainfall. Conditions may have changed since this report.",
+                "lat": 12.922,
+                "lng": 74.842,
+                "status": "under_review",
+                "source": "Demonstration data",
+                "createdAt": "2026-10-23T20:35:04.390Z",
+                "updatedAt": "2026-10-23T20:35:04.390Z",
+                "demo": true,
+                "repeatedReportCount": 1,
+                "reportIds": [
+                  "demo-water-1"
+                ],
+                "risk": {
+                  "score": 75.2,
+                  "category": "Elevated",
+                  "factors": {
+                    "severity": {
+                      "normalized": 100,
+                      "weight": 0.5,
+                      "contribution": 50,
+                      "label": "high"
+                    },
+                    "frequency": {
+                      "normalized": 25,
+                      "weight": 0.3,
+                      "contribution": 7.5,
+                      "nearbyIndependentReports": 1
+                    },
+                    "recency": {
+                      "normalized": 88.7,
+                      "weight": 0.2,
+                      "contribution": 17.7,
+                      "ageDays": 1.2086963773148147
+                    }
+                  },
+                  "confidence": "Moderate",
+                  "explanation": "high severity contributes 50/50 weighted points; 1 independent nearby report contribute 7.5/30 points; recency contributes 17.7/20 points. This is a provisional estimate, not an official safety rating."
+                }
+              },
+              {
+                "id": "demo-water-2",
+                "category": "Waterlogging",
+                "severity": "medium",
+                "description": "A second waterlogging report in the sample corridor.",
+                "lat": 12.912,
+                "lng": 74.85,
+                "status": "under_review",
+                "source": "Demonstration data",
+                "createdAt": "2026-10-23T01:23:04.390Z",
+                "updatedAt": "2026-10-23T01:23:04.390Z",
+                "demo": true,
+                "repeatedReportCount": 1,
+                "reportIds": [
+                  "demo-water-2"
+                ],
+                "risk": {
+                  "score": 53.9,
+                  "category": "Moderate",
+                  "factors": {
+                    "severity": {
+                      "normalized": 60,
+                      "weight": 0.5,
+                      "contribution": 30,
+                      "label": "medium"
+                    },
+                    "frequency": {
+                      "normalized": 25,
+                      "weight": 0.3,
+                      "contribution": 7.5,
+                      "nearbyIndependentReports": 1
+                    },
+                    "recency": {
+                      "normalized": 82,
+                      "weight": 0.2,
+                      "contribution": 16.4,
+                      "ageDays": 2.008696377314815
+                    }
+                  },
+                  "confidence": "Moderate",
+                  "explanation": "medium severity contributes 30/50 weighted points; 1 independent nearby report contribute 7.5/30 points; recency contributes 16.4/20 points. This is a provisional estimate, not an official safety rating."
+                }
+              },
+              {
+                "id": "demo-damage-1",
+                "category": "Damaged road",
+                "severity": "medium",
+                "description": "Uneven road surface reported along this corridor.",
+                "lat": 12.911,
+                "lng": 74.858,
+                "status": "unverified",
+                "source": "Demonstration data",
+                "createdAt": "2026-10-22T01:23:04.390Z",
+                "updatedAt": "2026-10-22T01:23:04.390Z",
+                "demo": true,
+                "repeatedReportCount": 1,
+                "reportIds": [
+                  "demo-damage-1"
+                ],
+                "risk": {
+                  "score": 52.3,
+                  "category": "Moderate",
+                  "factors": {
+                    "severity": {
+                      "normalized": 60,
+                      "weight": 0.5,
+                      "contribution": 30,
+                      "label": "medium"
+                    },
+                    "frequency": {
+                      "normalized": 25,
+                      "weight": 0.3,
+                      "contribution": 7.5,
+                      "nearbyIndependentReports": 1
+                    },
+                    "recency": {
+                      "normalized": 74.2,
+                      "weight": 0.2,
+                      "contribution": 14.8,
+                      "ageDays": 3.008696377314815
+                    }
+                  },
+                  "confidence": "Moderate",
+                  "explanation": "medium severity contributes 30/50 weighted points; 1 independent nearby report contribute 7.5/30 points; recency contributes 14.8/20 points. This is a provisional estimate, not an official safety rating."
+                }
+              }
+            ],
+            "confidence": "Moderate",
+            "explanation": "Based on 3 distinct incident(s) and 3 report(s) within 350 m of the route line. 0 repeated report(s) are shown separately and do not inflate the incident score."
+          }
+        },
+        {
+          "id": "route-c",
+          "name": "Greenway Alternative",
+          "distanceKm": 9.33,
+          "durationMin": 28,
+          "source": "Illustrative demo geometry; distance calculated from geometry; duration assumes 20 km/h average speed",
+          "geometry": [
+            {
+              "lat": 12.9141,
+              "lng": 74.856
+            },
+            {
+              "lat": 12.918,
+              "lng": 74.866
+            },
+            {
+              "lat": 12.902,
+              "lng": 74.864
+            },
+            {
+              "lat": 12.902,
+              "lng": 74.831
+            },
+            {
+              "lat": 12.918,
+              "lng": 74.83
+            },
+            {
+              "lat": 12.924,
+              "lng": 74.837
+            }
+          ],
+          "risk": {
+            "score": null,
+            "category": "Insufficient data",
+            "hazardCount": 0,
+            "repeatedReportCount": 0,
+            "hazards": [],
+            "confidence": "Limited",
+            "explanation": "No reports are associated with this route corridor. This means there is insufficient reported information, not that the route is safe."
+          }
+        }
+      ],
+      "comparison": {
+        "lowestRiskRouteId": "route-b",
+        "shortestRouteId": "route-a",
+        "fastestRouteId": "route-a",
+        "summary": "City Centre Link has the lowest estimated risk among routes with associated reports. Coastal Connector is shortest and Coastal Connector has the shortest estimated time. These are separate trade-offs."
+      },
+      "preference": "balanced",
+      "origin": "Mangalore demo origin",
+      "destination": "Mangalore demo destination",
+      "note": "Route geometry, distances and durations are illustrative demo data; travel time is not live traffic."
+    }
+  ],
+  "statusHistory": []
+}
