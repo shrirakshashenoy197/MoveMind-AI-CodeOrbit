@@ -149,6 +149,21 @@ If deployed separately, the frontend calls the API host using `VITE_API_BASE`; C
 - JSON-file storage is intended for a local hackathon demo, not concurrent production use.
 - OpenStreetMap tiles require connectivity and are subject to provider usage policies.
 
+ ## Live Demo
+
+- Frontend Website: https://move-mind-ai-code-orbit.vercel.app/
+- Backend Server: https://movemind-ai-codeorbit.onrender.com/
+
+## Project Overview
+
+MoveMind AI is an urban mobility intelligence platform that helps users report road hazards, assess route risks, compare routes, and explore AI-inspired urban response recommendations.
+
+## Technology Stack
+
+- Frontend: React, Vite
+- Backend: Node.js, Express.js
+- Deployment: Vercel (Frontend) and Render (Backend)
+
 ## Team
 
 **CodeOrbit** · ChronoForge 2026 · Agentic AI · Cities of the Future  
