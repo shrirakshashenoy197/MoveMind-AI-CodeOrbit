@@ -33,7 +33,7 @@ function StatCard({label,value,sub,icon:Icon,tone='green'}) { return <div classN
 function BarList({data, colors={}}) { const entries=Object.entries(data||{}); const max=Math.max(1,...entries.map(([,v])=>v)); return entries.length?<div className="bar-list">{entries.map(([k,v])=>
 <div className="bar-row" key={k}>
 <div className="bar-label">
-<span>{k}</span>
+<span>{k.replace(/_/g,' ')}</span>
 <b>{v}</b>
 </div>
 <div className="bar-track">
@@ -41,7 +41,7 @@ function BarList({data, colors={}}) { const entries=Object.entries(data||{}); co
 </div>
 </div>)}</div>:<Empty title="No chart data" text="Submit a report to start building insights."/>; }
 function HazardRows({items,onSelect,onStatus}) { return <div className="hazard-list">{items.map(h=>
-<div className="hazard-row" key={h.id} onClick={()=>onSelect?.(h)} role="button" tabIndex={0} onKeyDown={e=>e.key==='Enter'&&onSelect?.(h)}>
+<div className="hazard-row" key={h.id} onClick={()=>onSelect?.(h)} role="button" tabIndex={0} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onSelect?.(h);}}}>
 <div className={`hazard-symbol ${h.demo?'demo':''}`}>
 <AlertTriangle size={17}/>
 </div>
@@ -63,9 +63,9 @@ function HazardRows({items,onSelect,onStatus}) { return <div className="hazard-l
 </div>)}</div>; }
 
 export default function App() {
- const [page,setPage]=useState('landing'),[mobileNav,setMobileNav]=useState(false),[hazards,setHazards]=useState([]),[dashboard,setDashboard]=useState(null),[loading,setLoading]=useState(true),[error,setError]=useState(''),[toast,setToast]=useState(null),[selected,setSelected]=useState(null),[filters,setFilters]=useState({category:'All categories',severity:'All severities',status:'All statuses',days:'all',search:''}),[pickedLocation,setPickedLocation]=useState(null),[form,setForm]=useState({category:'Pothole',severity:'medium',description:''}),[submitting,setSubmitting]=useState(false),[routeResult,setRouteResult]=useState(null),[routeLoading,setRouteLoading]=useState(false),[agent,setAgent]=useState(null),[agentLoading,setAgentLoading]=useState(false),[simulation,setSimulation]=useState(null),[simLoading,setSimLoading]=useState(false),[simHazard,setSimHazard]=useState(''),[simScenario,setSimScenario]=useState('repair'),[routePreference,setRoutePreference]=useState('balanced'),[priorityFilter,setPriorityFilter]=useState('All'),[history,setHistory]=useState([]);
+ const [page,setPage]=useState('landing'),[mobileNav,setMobileNav]=useState(false),[apiStatus,setApiStatus]=useState('checking'),[hazards,setHazards]=useState([]),[dashboard,setDashboard]=useState(null),[loading,setLoading]=useState(true),[error,setError]=useState(''),[toast,setToast]=useState(null),[selected,setSelected]=useState(null),[filters,setFilters]=useState({category:'All categories',severity:'All severities',status:'All statuses',days:'all',search:''}),[pickedLocation,setPickedLocation]=useState(null),[form,setForm]=useState({category:'Pothole',severity:'medium',description:''}),[submitting,setSubmitting]=useState(false),[routeResult,setRouteResult]=useState(null),[routeLoading,setRouteLoading]=useState(false),[agent,setAgent]=useState(null),[agentLoading,setAgentLoading]=useState(false),[simulation,setSimulation]=useState(null),[simLoading,setSimLoading]=useState(false),[simHazard,setSimHazard]=useState(''),[simScenario,setSimScenario]=useState('repair'),[routePreference,setRoutePreference]=useState('balanced'),[priorityFilter,setPriorityFilter]=useState('All'),[history,setHistory]=useState([]);
  const notify=(message,type='success')=>{setToast({message,type});setTimeout(()=>setToast(null),3600);};
- const refresh=useCallback(async()=>{setError('');try{const [h,d]=await Promise.all([api('/api/hazards'),api('/api/dashboard')]);setHazards(h.hazards);setDashboard(d);setSelected(old=>old?h.hazards.find(x=>x.id===old.id)||null:null);}catch(e){setError(e.message); }finally{setLoading(false);}},[]);
+ const refresh=useCallback(async()=>{setError('');try{const [h,d]=await Promise.all([api('/api/hazards'),api('/api/dashboard')]);setHazards(h.hazards);setDashboard(d);setSelected(old=>old?h.hazards.find(x=>x.id===old.id)||null:null);setApiStatus('connected');}catch(e){setApiStatus('offline');setError(e.message); }finally{setLoading(false);}},[]);
  useEffect(()=>{refresh();},[refresh]);
  useEffect(()=>{if(page==='routes')api('/api/routes/history').then(x=>setHistory(x.history||[])).catch(()=>{});},[page,routeResult]);
  const go=p=>{setPage(p);setMobileNav(false);setError('');if(p==='report')setPickedLocation(null);};
@@ -77,11 +77,11 @@ export default function App() {
  const resetDemo=async()=>{if(!window.confirm('Reset demonstration records? Community-submitted reports will be preserved.'))return;try{const r=await api('/api/demo/reset',{method:'POST',body:'{}'});await refresh();setRouteResult(null);setAgent(null);notify(r.message);}catch(e){notify(e.message,'error');}};
  const updateStatus=async(h,status)=>{try{await api(`/api/hazards/${h.id}/status`,{method:'PATCH',body:JSON.stringify({status})});await refresh();notify(`Status updated to ${status.replace('_',' ')}.`);}catch(e){notify(e.message,'error');}};
  const exportCsv=()=>{window.location.href=`${API_BASE}/api/export.csv`;};
- const activeTitle=NAV.find(n=>n[1]===page)?.[0]||'Overview';
+ const activeTitle=NAV.find(n=>n[1]===page)?.[0]||(page==='about'?'About MoveMind AI':'Overview');
  if(page==='landing')return <Landing onExplore={()=>go('overview')} onReport={()=>go('report')}/>;
  return <div className="app-shell">
-  <aside className={`sidebar ${mobileNav?'open':''}`}>
-<div className="brand" onClick={()=>go('overview')}>
+  <aside id="primary-navigation" className={`sidebar ${mobileNav?'open':''}`}>
+<div className="brand">
 <div className="brand-mark">
 <Navigation size={21}/>
 <span/>
@@ -118,19 +118,19 @@ export default function App() {
 </button>
 </div>
   </aside>
-  {mobileNav&&<div className="scrim" onClick={()=>setMobileNav(false)}/>}
+  {mobileNav&&<button type="button" className="scrim" onClick={()=>setMobileNav(false)} aria-label="Close menu"/>}
   <main className="main-shell">
 <header className="topbar">
 <div className="top-left">
-<button className="icon-btn mobile-menu" onClick={()=>setMobileNav(true)} aria-label="Open menu">
+<button className="icon-btn mobile-menu" onClick={()=>setMobileNav(true)} aria-label="Open menu" aria-controls="primary-navigation" aria-expanded={mobileNav}>
 <Menu size={20}/>
 </button>
 <div className="breadcrumb">Workspace <span>/</span> <b>{activeTitle}</b>
 </div>
 </div>
 <div className="top-actions">
-<span className="system-status">
-<i/> API connected</span>
+<span className={`system-status api-${apiStatus}`} role="status" aria-live="polite">
+<i aria-hidden="true"/>{apiStatus==='connected'?'API connected':apiStatus==='offline'?'API unavailable':'Checking API'}</span>
 <button className="icon-btn" title="Refresh data" onClick={refresh}>
 <RefreshCw size={16}/>
 </button>
@@ -152,7 +152,7 @@ export default function App() {
     {page==='report'&&<ReportPage form={form} setForm={setForm} pickedLocation={pickedLocation} setPickedLocation={setPickedLocation} hazards={hazards} submitting={submitting} onSubmit={submitHazard} onCancel={()=>go('map')}/>}
     {page==='routes'&&<RoutesPage result={routeResult} loading={routeLoading} onCompare={compareRoutes} preference={routePreference} setPreference={setRoutePreference} history={history}/>}
     {page==='agent'&&<AgentPage agent={agent} loading={agentLoading} onRun={runAgent}/>}
-    {page==='whatif'&&<WhatIfPage hazards={hazards} selected={simHazard} setSelected={setSimHazard} scenario={simScenario} setScenario={setSimScenario} result={simulation} loading={simLoading} onRun={runSimulation}/>}
+    {page==='whatif'&&<WhatIfPage hazards={hazards} selected={simHazard} setSelected={value=>{setSimHazard(value);setSimulation(null);}} scenario={simScenario} setScenario={value=>{setSimScenario(value);setSimulation(null);}} result={simulation} loading={simLoading} onRun={runSimulation}/>}
     {page==='priorities'&&<PrioritiesPage hazards={hazards} filter={priorityFilter} setFilter={setPriorityFilter} onSelect={h=>{setSelected(h);go('map')}} onStatus={updateStatus}/>}
     {page==='insights'&&<InsightsPage dashboard={dashboard} hazards={hazards} onExport={exportCsv} history={history} onReset={resetDemo}/>}
     {page==='about'&&<AboutPage onGo={go}/>}
@@ -218,7 +218,7 @@ function Landing({onExplore,onReport}) {return <div className="landing">
  <div className="hero-visual">
 <div className="visual-topline">
 <span>
-<span className="live-dot"/> MOBILITY OVERVIEW</span>
+<span className="live-dot"/> ILLUSTRATIVE MAP PREVIEW</span>
 <span>12.91° N · 74.85° E</span>
 </div>
 <div className="preview-map">
@@ -236,27 +236,27 @@ function Landing({onExplore,onReport}) {return <div className="landing">
 <circle cx={x} cy={y} r="6" fill={c} stroke="#0b1220" strokeWidth="3"/>
 </g>)}</svg>
 <div className="map-label label-a">
-<span className="tiny-dot red"/> High severity <b>03</b>
+<span className="tiny-dot red"/> Sample markers <b>demo</b>
 </div>
 <div className="map-label label-b">
-<span className="tiny-dot amber"/> Reports nearby <b>06</b>
+<span className="tiny-dot amber"/> Route lines <b>sample</b>
 </div>
-<div className="map-coord">MANGALORE · DEMO MAP</div>
+<div className="map-coord">MANGALORE · ILLUSTRATIVE</div>
 </div>
 <div className="preview-bottom">
 <div>
-<span className="preview-label">LOWEST ESTIMATED RISK</span>
+<span className="preview-label">EXAMPLE RISK SCORE</span>
 <b>
 <span className="risk-number">42</span> <small>/ 100</small>
 </b>
-<span className="preview-note">Illustrative estimate</span>
+<span className="preview-note">Illustrative only · not live data</span>
 </div>
 <div className="preview-route">
 <span className="route-line teal-line"/> <div>
-<b>Greenway Alternative</b>
-<small>7.4 km · 24 min estimate</small>
+<b>Example route</b>
+<small>7.4 km · 24 min example</small>
 </div>
-<span className="mini-pill">Lower risk</span>
+<span className="mini-pill">Example only</span>
 </div>
 </div>
 <div className="preview-float">
@@ -265,7 +265,7 @@ function Landing({onExplore,onReport}) {return <div className="landing">
 </div>
 <div>
 <b>Urban Response Agent</b>
-<span>3 tools completed · Evidence ready</span>
+<span>Illustrative workflow · not live activity</span>
 </div>
 <span className="float-check">
 <Check size={14}/>
@@ -359,7 +359,7 @@ function Overview({dashboard, hazards, onGo,onSelect,onAgent}) {const s=dashboar
 <span>
 <i className="legend-green"/>Low severity</span>
 <span>
-<i className="legend-outline"/>Community report</span>
+<i className="legend-outline"/>Dashed outline · demo record</span>
 </div>
 </Card>
  <Card>
@@ -454,22 +454,22 @@ function MapPage({hazards,allCount,filters,setFilters,selected,setSelected,onGo,
 <div className="filter-title">
 <Filter size={16}/> Filter reports</div>
 <div className="filter-controls">
-<select value={filters.category} onChange={e=>setFilters({...filters,category:e.target.value})}>
+<select aria-label="Filter by category" value={filters.category} onChange={e=>setFilters({...filters,category:e.target.value})}>
 <option>All categories</option>{['Pothole','Waterlogging','Damaged road','Obstruction'].map(x=>
 <option key={x}>{x}</option>)}</select>
-<select value={filters.severity} onChange={e=>setFilters({...filters,severity:e.target.value})}>
+<select aria-label="Filter by severity" value={filters.severity} onChange={e=>setFilters({...filters,severity:e.target.value})}>
 <option>All severities</option>{['low','medium','high'].map(x=>
 <option key={x}>{x}</option>)}</select>
-<select value={filters.status} onChange={e=>setFilters({...filters,status:e.target.value})}>
+<select aria-label="Filter by status" value={filters.status} onChange={e=>setFilters({...filters,status:e.target.value})}>
 <option>All statuses</option>{['unverified','under_review','verified'].map(x=>
 <option key={x}>{x}</option>)}</select>
-<select value={filters.days} onChange={e=>setFilters({...filters,days:e.target.value})}>
+<select aria-label="Filter by report age" value={filters.days} onChange={e=>setFilters({...filters,days:e.target.value})}>
 <option value="all">Any age</option>
 <option value="1">Last 24 hours</option>
 <option value="7">Last 7 days</option>
 <option value="30">Last 30 days</option>
 </select>
-<input placeholder="Search reports…" value={filters.search} onChange={e=>setFilters({...filters,search:e.target.value})}/>
+<input aria-label="Search reports" placeholder="Search reports…" value={filters.search} onChange={e=>setFilters({...filters,search:e.target.value})}/>
 <button className="btn btn-secondary" onClick={()=>{setFilters({category:'All categories',severity:'All severities',status:'All statuses',days:'all',search:''});onRefresh();}}>Reset</button>
 </div>
 </Card>
@@ -493,7 +493,7 @@ function MapPage({hazards,allCount,filters,setFilters,selected,setSelected,onGo,
 <span>
 <i className="legend-green"/>Low</span>
 <span>
-<i className="legend-outline"/>Community submission</span>
+<i className="legend-outline"/>Dashed outline · demo record</span>
 </div>
 </Card>
  <Card className="report-detail-panel">
@@ -579,12 +579,13 @@ function ReportPage({form,setForm,pickedLocation,setPickedLocation,hazards,submi
 <select value={form.category} onChange={e=>setForm({...form,category:e.target.value})} required>{['Pothole','Waterlogging','Damaged road','Obstruction'].map(x=>
 <option key={x}>{x}</option>)}</select>
 </label>
-<label>Severity <span>*</span>
+<fieldset className="severity-field">
+<legend>Severity <span>*</span></legend>
 <div className="severity-options">{['low','medium','high'].map(s=>
-<button type="button" key={s} className={`severity-option ${s} ${form.severity===s?'chosen':''}`} onClick={()=>setForm({...form,severity:s})}>
+<button type="button" key={s} aria-pressed={form.severity===s} className={`severity-option ${s} ${form.severity===s?'chosen':''}`} onClick={()=>setForm({...form,severity:s})}>
 <i/>{s[0].toUpperCase()+s.slice(1)}{form.severity===s&&<Check size={14}/>}</button>)}</div>
 <small className="field-help">Use your best judgement. Severity is reporter-selected, not independently assessed.</small>
-</label>
+</fieldset>
 <label>Description <small>(optional)</small>
 <textarea maxLength={500} rows={4} placeholder="What did you notice? Include useful context, not personal information." value={form.description} onChange={e=>setForm({...form,description:e.target.value})}/>
 <small className="field-help">{form.description.length}/500 characters</small>
@@ -620,7 +621,7 @@ function ReportPage({form,setForm,pickedLocation,setPickedLocation,hazards,submi
 </div>
 <span className="mini-tag">MANGALORE</span>
 </div>
-<MapView hazards={hazards} pickLocation onPick={setPickedLocation}/>{pickedLocation&&<div className="picked-coordinate">
+<MapView hazards={hazards} pickLocation onPick={setPickedLocation} pickedLocation={pickedLocation}/>{pickedLocation&&<div className="picked-coordinate">
 <Check size={14}/> Pin selected at {pickedLocation.lat}, {pickedLocation.lng}</div>}{pickedLocation&&(pickedLocation.lat<12.6||pickedLocation.lat>13.3||pickedLocation.lng<74.6||pickedLocation.lng>75.3)&&<div className="notice-bar">
 <div className="notice-icon">
 <CircleHelp size={17}/>
@@ -672,7 +673,7 @@ function RoutesPage({result,loading,onCompare,preference,setPreference,history})
 </div>
 <div className="route-control-note">
 <Compass size={16}/>
-<span>Risk is one factor, not a safety guarantee.</span>
+<span>Risk is not a safety guarantee. Preference is saved; sorting only changes the display order.</span>
 </div>
 </div>
  {!result?<Card className="route-empty">
